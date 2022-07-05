@@ -138,7 +138,7 @@ class AugmenterAffine(object):
         scale = np.eye(3, 3) * self.rng.uniform(1 - self.max_scaling, 1 + self.max_scaling)
         
         # Affine transformation matrix.
-        transformation_mtx = np.dot( scale, np.dot(rot_z, np.dot(rot_x, rot_y)) )
+        transformation_mtx = np.linalg.multi_dot([scale, rot_z, rot_x, rot_y])
         
         return transformation_mtx
 
